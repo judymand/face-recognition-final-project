@@ -1,7 +1,16 @@
 import pymongo
 import certifi
 import datetime
-client = pymongo.MongoClient("mongodb://iHaveEyes:quzdeb-zeSvom-musba9@cluster0-shard-00-00.tobyl.mongodb.net:27017,cluster0-shard-00-01.tobyl.mongodb.net:27017,cluster0-shard-00-02.tobyl.mongodb.net:27017/app?ssl=true&replicaSet=atlas-x2w3z3-shard-0&authSource=admin&retryWrites=true&w=majority", tlsCAFile=certifi.where())
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+name = os.environ.get('NAME')
+password = os.environ.get('PASSWORD')
+
+
+client = pymongo.MongoClient(
+    f'mongodb://iHaveEyes:{password}@cluster0-shard-00-00.tobyl.mongodb.net:27017,cluster0-shard-00-01.tobyl.mongodb.net:27017,cluster0-shard-00-02.tobyl.mongodb.net:27017/{name}?ssl=true&replicaSet=atlas-x2w3z3-shard-0&authSource=admin&retryWrites=true&w=majority', tlsCAFile=certifi.where())
 
 
 app = client.app
